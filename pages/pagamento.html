@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Pagamento</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .navbar {
+        height: 80px;
+      }
+      .navbar-brand img {
+        height: 40px;
+      }
+      .payment-section {
+        margin-bottom: 1.5rem;
+      }
+      .payment-option {
+        margin-bottom: 1rem;
+      }
+      .btn-group {
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="./pagina_inicial.html">Tela Inicial</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meu_perfil.html">Meu Perfil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meus_pedidos.html">Meus Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meu_carrinho.html">Meu Carrinho</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Sair</a>
+            </li>
+          </ul>
+          <div class="user-info ms-auto">
+            <span>Nome do Usuário</span>
+            <img
+              src="images/user.png"
+              alt="Profile"
+              class="rounded-circle"
+              width="40"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-4">
+      <form id="paymentForm">
+        <div class="payment-section">
+          <h3>Resumo do Pedido</h3>
+          <div class="mb-3">
+            <label for="itens" class="form-label">Itens</label>
+            <input
+              type="text"
+              class="form-control"
+              id="itens"
+              value="Produto X, Produto Y"
+              disabled
+            />
+          </div>
+          <div class="mb-3">
+            <label for="quantidade" class="form-label">Quantidade</label>
+            <input
+              type="text"
+              class="form-control"
+              id="quantidade"
+              value="2"
+              disabled
+            />
+          </div>
+          <div class="mb-3">
+            <label for="subtotal" class="form-label">Subtotal</label>
+            <input
+              type="text"
+              class="form-control"
+              id="subtotal"
+              value="R$ 200,00"
+              disabled
+            />
+          </div>
+          <div class="mb-3">
+            <label for="desconto" class="form-label">Desconto</label>
+            <input
+              type="text"
+              class="form-control"
+              id="desconto"
+              value="R$ 20,00"
+              disabled
+            />
+          </div>
+          <div class="mb-3">
+            <label for="total" class="form-label">Total</label>
+            <input
+              type="text"
+              class="form-control"
+              id="total"
+              value="R$ 180,00"
+              disabled
+            />
+          </div>
+        </div>
+        <!-- Continuaremos com a parte 2 a seguir -->
+        <!-- Parte 2 -->
+        <div class="payment-section">
+          <h3>Entrega</h3>
+          <div class="mb-3">
+            <label for="endereco" class="form-label">Endereço de Entrega</label>
+            <input
+              type="text"
+              class="form-control"
+              id="endereco"
+              value="Rua Exemplo, 123, Bairro, Cidade - Estado"
+              disabled
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label"
+              >Forma de Recebimento da Nota Fiscal</label
+            >
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="notaFiscal"
+                id="email"
+                value="email"
+                checked
+              />
+              <label class="form-check-label" for="email"> E-mail </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="notaFiscal"
+                id="sms"
+                value="sms"
+              />
+              <label class="form-check-label" for="sms"> SMS (Telefone) </label>
+            </div>
+          </div>
+        </div>
+        <!-- Continuaremos com a parte 3 a seguir -->
+        <!-- Parte 3 -->
+        <div class="payment-section">
+          <h3>Pagamento</h3>
+          <div class="payment-option">
+            <label class="form-label">Forma de Pagamento</label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="pagamento"
+                id="credito"
+                value="credito"
+                checked
+              />
+              <label class="form-check-label" for="credito"> Crédito </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="pagamento"
+                id="debito"
+                value="debito"
+              />
+              <label class="form-check-label" for="debito"> Débito </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="pagamento"
+                id="boleto"
+                value="boleto"
+              />
+              <label class="form-check-label" for="boleto"> Boleto </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="pagamento"
+                id="pix"
+                value="pix"
+              />
+              <label class="form-check-label" for="pix"> PIX </label>
+            </div>
+          </div>
+
+          <!-- Campos para Crédito -->
+          <div id="creditoFields" class="d-block">
+            <div class="mb-3">
+              <label for="numCartaoCredito" class="form-label"
+                >Número do Cartão</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="numCartaoCredito"
+                placeholder="Digite o número do cartão"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="nomeCartaoCredito" class="form-label"
+                >Nome Impresso no Cartão</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nomeCartaoCredito"
+                placeholder="Digite o nome impresso no cartão"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="cpfTitularCredito" class="form-label"
+                >CPF do Titular</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="cpfTitularCredito"
+                placeholder="Digite o CPF do titular"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="validadeCredito" class="form-label">Validade</label>
+              <input
+                type="text"
+                class="form-control"
+                id="validadeCredito"
+                placeholder="MM/AAAA"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="codigoSegurancaCredito" class="form-label"
+                >Código de Segurança</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="codigoSegurancaCredito"
+                placeholder="Digite o código de segurança"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="parcelasCredito" class="form-label"
+                >Quantidade de Parcelas</label
+              >
+              <select class="form-select" id="parcelasCredito" required>
+                <option value="1">1x</option>
+                <option value="2">2x</option>
+                <option value="3">3x</option>
+                <option value="4">4x</option>
+                <option value="5">5x</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="valorParcelas" class="form-label"
+                >Valor das Parcelas</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="valorParcelas"
+                value="R$ 180,00"
+                disabled
+              />
+            </div>
+          </div>
+
+          <!-- Campos para Débito -->
+          <div id="debitoFields" class="d-none">
+            <div class="mb-3">
+              <label for="numCartaoDebito" class="form-label"
+                >Número do Cartão</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="numCartaoDebito"
+                placeholder="Digite o número do cartão"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="nomeCartaoDebito" class="form-label"
+                >Nome Impresso no Cartão</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nomeCartaoDebito"
+                placeholder="Digite o nome impresso no cartão"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="cpfTitularDebito" class="form-label"
+                >CPF do Titular</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="cpfTitularDebito"
+                placeholder="Digite o CPF do titular"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="validadeDebito" class="form-label">Validade</label>
+              <input
+                type="text"
+                class="form-control"
+                id="validadeDebito"
+                placeholder="MM/AAAA"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="codigoSegurancaDebito" class="form-label"
+                >Código de Segurança</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="codigoSegurancaDebito"
+                placeholder="Digite o código de segurança"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Campos para Boleto e PIX -->
+          <div id="boletoPixFields" class="d-none">
+            <!-- Nenhum campo adicional -->
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            window.location.href="pagina_inicial.html"
+          >
+            Cancelar Compra
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="window.location.href='compra_realizada.html'"
+          >
+            Concluir Compra
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("paymentForm");
+        const creditoFields = document.getElementById("creditoFields");
+        const debitoFields = document.getElementById("debitoFields");
+        const boletoPixFields = document.getElementById("boletoPixFields");
+        const parcelasCredito = document.getElementById("parcelasCredito");
+        const valorParcelas = document.getElementById("valorParcelas");
+        const valorCompra = 180.0; // Exemplo, esse valor deve ser dinâmico
+
+        form.addEventListener("change", function (e) {
+          if (e.target.name === "pagamento") {
+            const value = e.target.value;
+            if (value === "credito") {
+              creditoFields.classList.remove("d-none");
+              debitoFields.classList.add("d-none");
+              boletoPixFields.classList.add("d-none");
+            } else if (value === "debito") {
+              creditoFields.classList.add("d-none");
+              debitoFields.classList.remove("d-none");
+              boletoPixFields.classList.add("d-none");
+            } else {
+              creditoFields.classList.add("d-none");
+              debitoFields.classList.add("d-none");
+              boletoPixFields.classList.remove("d-none");
+            }
+          }
+        });
+
+        parcelasCredito.addEventListener("change", function () {
+          const parcelas = parseInt(parcelasCredito.value, 10);
+          const valorPorParcela = (valorCompra / parcelas).toFixed(2);
+          valorParcelas.value = `(${parcelas}x R$ ${valorPorParcela})`;
+        });
+      });
+    </script>
+  </body>
+</html>

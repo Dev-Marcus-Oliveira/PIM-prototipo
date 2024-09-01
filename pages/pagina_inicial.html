@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de Produtos</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .navbar {
+        height: 80px;
+      }
+      .navbar-brand img {
+        height: 40px;
+      }
+      .product-card {
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+      .quantity-controls {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+      .quantity-controls button {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+      .aside-container {
+        position: sticky;
+        top: 0;
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 15px;
+        border: 1px solid #ddd;
+        background-color: #f8f9fa;
+      }
+      .aside-container .item {
+        margin-bottom: 1rem;
+      }
+      .aside-container .item .remove-btn {
+        cursor: pointer;
+        color: red;
+      }
+      .filters-bar {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="./pagina_inicial.html">Tela Inicial</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meu_perfil.html">Meu Perfil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meus_pedidos.html">Meus Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meu_carrinho.html">Meu Carrinho</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Sair</a>
+            </li>
+          </ul>
+          <div class="user-info ms-auto">
+            <span>Nome do Usuário</span>
+            <img
+              src="images/user.png"
+              alt="Profile"
+              class="rounded-circle"
+              width="40"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <!-- Barra de Filtros -->
+      <div class="filters-bar">
+        <div class="row">
+          <div class="col-md-4">
+            <input
+              type="text"
+              class="form-control"
+              id="search"
+              placeholder="Buscar por nome ou descrição"
+            />
+          </div>
+          <div class="col-md-4">
+            <select class="form-select" id="category">
+              <option value="">Todas as Categorias</option>
+              <option value="eletronicos">Eletrônicos</option>
+              <option value="roupas">Roupas</option>
+              <option value="acessorios">Acessórios</option>
+              <!-- Adicione mais categorias conforme necessário -->
+            </select>
+          </div>
+          <div class="col-md-4">
+            <select class="form-select" id="sort">
+              <option value="default">Ordenar por</option>
+              <option value="alphabetical">Nome (A-Z)</option>
+              <option value="price-asc">Preço (Menor para Maior)</option>
+              <option value="price-desc">Preço (Maior para Menor)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Central: Produtos -->
+        <div class="col-md-9">
+          <div class="row" id="productList">
+            <!-- Cards de Produtos -->
+            <!-- Produtos serão atualizados dinamicamente -->
+          </div>
+        </div>
+
+        <!-- Lateral: Carrinho de Compras -->
+        <div class="col-md-3">
+          <div class="aside-container" id="cartAside">
+            <h4>Carrinho de Compras</h4>
+            <!-- Items do Carrinho -->
+            <!-- Exemplo de item -->
+            <!-- Os itens serão adicionados dinamicamente aqui -->
+            <div id="cartItems"></div>
+            <div id="cartTotal">Total: R$ 0.00</div>
+            <button
+              class="btn btn-primary mt-3"
+              onclick="window.location.href='./pagamento.html'"
+            >
+              Finalizar Compra
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const products = [
+        {
+          id: "product1",
+          name: "Produto 1",
+          description: "Descrição do produto 1.",
+          price: 50.0,
+          category: "eletronicos",
+        },
+        {
+          id: "product2",
+          name: "Produto 2",
+          description: "Descrição do produto 2.",
+          price: 75.0,
+          category: "roupas",
+        },
+        {
+          id: "product3",
+          name: "Produto 3",
+          description: "Descrição do produto 3.",
+          price: 100.0,
+          category: "acessorios",
+        },
+        {
+          id: "product4",
+          name: "Produto 4",
+          description: "Descrição do produto 4.",
+          price: 120.0,
+          category: "eletronicos",
+        },
+        {
+          id: "product5",
+          name: "Produto 5",
+          description: "Descrição do produto 5.",
+          price: 150.0,
+          category: "roupas",
+        },
+      ];
+
+      function renderProducts(filteredProducts) {
+        const productList = document.getElementById("productList");
+        productList.innerHTML = "";
+
+        filteredProducts.forEach((product) => {
+          const productCard = `
+            <div class="col-md-4 mb-4">
+              <div class="card product-card">
+                <img
+                  src="images/${product.id}.jpg"
+                  class="card-img-top"
+                  alt="${product.name}"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">${product.name}</h5>
+                  <p class="card-text">${product.description}</p>
+                  <p class="card-text">Preço: R$ ${product.price.toFixed(2)}</p>
+                  <div class="quantity-controls">
+                    <button
+                      class="btn btn-secondary"
+                      onclick="updateQuantity('${product.id}', -10)"
+                    >
+                      -10
+                    </button>
+                    <button
+                      class="btn btn-secondary"
+                      onclick="updateQuantity('${product.id}', -1)"
+                    >
+                      -1
+                    </button>
+                    <span id="quantity-${product.id}">0</span>
+                    <button
+                      class="btn btn-secondary"
+                      onclick="updateQuantity('${product.id}', 1)"
+                    >
+                      +1
+                    </button>
+                    <button
+                      class="btn btn-secondary"
+                      onclick="updateQuantity('${product.id}', 10)"
+                    >
+                      +10
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          productList.innerHTML += productCard;
+        });
+      }
+
+      function applyFilters() {
+        let searchValue = document.getElementById("search").value.toLowerCase();
+        let categoryValue = document.getElementById("category").value;
+        let sortValue = document.getElementById("sort").value;
+
+        let filteredProducts = products.filter((product) => {
+          return (
+            (searchValue === "" ||
+              product.name.toLowerCase().includes(searchValue) ||
+              product.description.toLowerCase().includes(searchValue)) &&
+            (categoryValue === "" || product.category === categoryValue)
+          );
+        });
+
+        if (sortValue === "alphabetical") {
+          filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortValue === "price-asc") {
+          filteredProducts.sort((a, b) => a.price - b.price);
+        } else if (sortValue === "price-desc") {
+          filteredProducts.sort((a, b) => b.price - a.price);
+        }
+
+        renderProducts(filteredProducts);
+      }
+
+      function updateQuantity(productId, amount) {
+        const quantityElement = document.getElementById(
+          `quantity-${productId}`
+        );
+        let quantity = parseInt(quantityElement.textContent);
+        quantity += amount;
+
+        if (quantity < 0) quantity = 0;
+        quantityElement.textContent = quantity;
+
+        updateCart(productId, quantity);
+      }
+
+      function updateCart(productId, quantity) {
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || {};
+        if (quantity > 0) {
+          cartItems[productId] = quantity;
+        } else {
+          delete cartItems[productId];
+        }
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        updateCartAside();
+      }
+
+      function updateCartAside() {
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || {};
+        let cartAside = document.getElementById("cartItems");
+        cartAside.innerHTML = "";
+        let total = 0;
+
+        for (let productId in cartItems) {
+          let product = products.find((p) => p.id === productId);
+          if (product) {
+            let itemQuantity = cartItems[productId];
+            let itemTotal = product.price * itemQuantity;
+            total += itemTotal;
+            cartAside.innerHTML += `
+              <div class="item">
+                <span>${
+                  product.name
+                } (x${itemQuantity}) - R$ ${itemTotal.toFixed(2)}</span>
+                <span class="remove-btn" onclick="removeFromCart('${productId}')">Remover</span>
+              </div>
+            `;
+          }
+        }
+
+        document.getElementById(
+          "cartTotal"
+        ).textContent = `Total: R$ ${total.toFixed(2)}`;
+      }
+
+      function removeFromCart(productId) {
+        updateQuantity(
+          productId,
+          -parseInt(
+            document.getElementById(`quantity-${productId}`).textContent
+          )
+        );
+      }
+
+      document.getElementById("search").addEventListener("input", applyFilters);
+      document
+        .getElementById("category")
+        .addEventListener("change", applyFilters);
+      document.getElementById("sort").addEventListener("change", applyFilters);
+
+      window.onload = function () {
+        applyFilters();
+        updateCartAside();
+      };
+    </script>
+  </body>
+</html>

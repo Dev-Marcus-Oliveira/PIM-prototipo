@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu Carrinho</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .navbar {
+        height: 80px;
+      }
+      .navbar-brand img {
+        height: 40px;
+      }
+      .cart-table th,
+      .cart-table td {
+        text-align: center;
+        vertical-align: middle; /* Centraliza verticalmente o texto */
+      }
+      .cart-summary {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        padding: 15px;
+      }
+      .cart-summary h4 {
+        margin-bottom: 15px;
+      }
+      .btn-sm {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="./pagina_inicial.html">Tela Inicial</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meu_perfil.html">Meu Perfil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meus_pedidos.html">Meus Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./meu_carrinho.html">Meu Carrinho</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Sair</a>
+            </li>
+          </ul>
+          <div class="user-info ms-auto">
+            <span>Nome do Usuário</span>
+            <img
+              src="images/user.png"
+              alt="Profile"
+              class="rounded-circle"
+              width="40"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <h2>Meu Carrinho</h2>
+      <!-- Tabela de Itens do Carrinho -->
+      <table class="table table-bordered cart-table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Subtotal</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Produto 1</td>
+            <td>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                onclick="updateQuantity('qty-1', -1)"
+              >
+                -
+              </button>
+              <span id="qty-1">2</span>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                onclick="updateQuantity('qty-1', 1)"
+              >
+                +
+              </button>
+            </td>
+            <td>R$ 50,00</td>
+            <td>R$ 100,00</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="removeItem(this)">
+                Remover
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Produto 2</td>
+            <td>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                onclick="updateQuantity('qty-2', -1)"
+              >
+                -
+              </button>
+              <span id="qty-2">1</span>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                onclick="updateQuantity('qty-2', 1)"
+              >
+                +
+              </button>
+            </td>
+            <td>R$ 75,00</td>
+            <td>R$ 75,00</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="removeItem(this)">
+                Remover
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Produto 3</td>
+            <td>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                onclick="updateQuantity('qty-3', -1)"
+              >
+                -
+              </button>
+              <span id="qty-3">1</span>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                onclick="updateQuantity('qty-3', 1)"
+              >
+                +
+              </button>
+            </td>
+            <td>R$ 100,00</td>
+            <td>R$ 100,00</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="removeItem(this)">
+                Remover
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Resumo do Carrinho -->
+      <div class="cart-summary">
+        <h4>Resumo do Carrinho</h4>
+        <p>
+          <strong>Total dos Itens:</strong> R$
+          <span id="totalItems">275,00</span>
+        </p>
+        <p><strong>Frete:</strong> R$ 20,00</p>
+        <p>
+          <strong>Total Geral:</strong> R$ <span id="totalGeneral">295,00</span>
+        </p>
+        <a href="pagamento.html" class="btn btn-primary">Finalizar Compra</a>
+        <button class="btn btn-secondary" onclick="clearCart()">
+          Limpar Carrinho
+        </button>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function updateQuantity(id, change) {
+        const quantityElement = document.getElementById(id);
+        let quantity = parseInt(quantityElement.textContent);
+        quantity += change;
+        if (quantity < 0) quantity = 0;
+        quantityElement.textContent = quantity;
+
+        updateSubtotal(id, quantity);
+      }
+
+      function updateSubtotal(id, quantity) {
+        const row = document.getElementById(id).closest("tr");
+        const price = parseFloat(
+          row.cells[2].textContent.replace("R$ ", "").replace(",", ".")
+        );
+        const subtotal = (price * quantity).toFixed(2).replace(".", ",");
+        row.cells[3].textContent = `R$ ${subtotal}`;
+
+        updateCartSummary();
+      }
+
+      function removeItem(button) {
+        const row = button.closest("tr");
+        row.remove();
+        updateCartSummary();
+      }
+
+      function clearCart() {
+        if (confirm("Tem certeza que deseja limpar o carrinho?")) {
+          document.querySelector("tbody").innerHTML = "";
+          document.getElementById("totalItems").textContent = "0,00";
+          document.getElementById("totalGeneral").textContent = "0,00";
+        }
+      }
+
+      function updateCartSummary() {
+        const rows = document.querySelectorAll("tbody tr");
+        let totalItems = 0;
+        rows.forEach((row) => {
+          const subtotal = parseFloat(
+            row.cells[3].textContent.replace("R$ ", "").replace(",", ".")
+          );
+          totalItems += subtotal;
+        });
+        document.getElementById("totalItems").textContent = totalItems
+          .toFixed(2)
+          .replace(".", ",");
+        const totalGeneral = totalItems + 20; // Adiciona o frete fixo de R$ 20,00
+        document.getElementById("totalGeneral").textContent = totalGeneral
+          .toFixed(2)
+          .replace(".", ",");
+      }
+
+      // Inicializa o resumo do carrinho
+      updateCartSummary();
+    </script>
+  </body>
+</html>
